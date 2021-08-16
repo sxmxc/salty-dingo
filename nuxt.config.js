@@ -40,7 +40,26 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/strapi',
+    '@nuxtjs/auth-next'
   ],
+
+  auth: {
+    redirect: {
+    login: '/login',
+    logout: '/',
+    callback: '/login',
+    home: '/'
+    }
+  },
+
+  router: {
+  },
+
+  strapi: {
+    entities: [ 'organizations','contacts','users'],
+    url: 'http://localhost:1337'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

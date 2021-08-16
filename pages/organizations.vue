@@ -1,15 +1,32 @@
 <template>
-  <section class="section">
-    <h2 class="title is-3 has-text-grey">
-      "Just start  <b-icon
-        icon="rocket"
-        size="is-large"
-      />"
-    </h2>
-    <h3 class="subtitle is-6 has-text-grey">
-      Author: <a href="https://github.com/anteriovieira">
-        Antério Vieira
-      </a>
-    </h3>
-  </section>
+  <div class="container">
+    <div v-if="error">
+      {{ error }}
+    </div>
+    <ul v-else>
+      <li v-for="organization in organizations" :key="organization.id">
+        {{ organization.name }}
+      </li>
+    </ul>
+  </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data () {
+    return {
+      organizations: [],
+      error: null
+    }
+  },
+  async mounted () {
+    try {
+      this.organizations = await this.$strapi.$organizations.find()
+    } catch (error) {
+      this.error = error
+    }
+  }
+}
+</script>
+

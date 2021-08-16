@@ -1,15 +1,30 @@
 <template>
-  <section class="section">
-    <h2 class="title is-3 has-text-grey">
-      "Just start  <b-icon
-        icon="rocket"
-        size="is-large"
-      />"
-    </h2>
-    <h3 class="subtitle is-6 has-text-grey">
-      Author: <a href="https://github.com/anteriovieira">
-        Antério Vieira
-      </a>
-    </h3>
-  </section>
+  <p v-if="$fetchState.pending">Fetching contacts...</p>
+  <p v-else-if="$fetchState.error">An error occurred :(</p>
+  <div v-else>
+    <h1>Nuxt Mountains</h1>
+    <div v-if="error">
+      {{ error }}
+    </div>
+    <ul v-else>
+      <li v-for="contact of contacts" :key="contact.id">{{ contact.name }}</li>
+    </ul>
+    <button @click="$fetch">Refresh</button>
+  </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        contacts: [],
+        error: null
+      }
+    },
+    async fetch() {
+      this.contacts = await fetch(
+        'http://localhost:1337/contacts'
+      ).then(res => res.json())
+    }
+  }
+</script>
