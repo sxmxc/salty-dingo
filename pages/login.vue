@@ -1,4 +1,5 @@
 <template>
+<section class="section">
   <div>
     <form @submit.prevent="userLogin">
       <div>
@@ -14,6 +15,7 @@
       </div>
     </form>
   </div>
+</section>
 </template>
 
 <script>

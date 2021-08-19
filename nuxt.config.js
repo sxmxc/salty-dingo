@@ -15,12 +15,11 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@/assets/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/fontawesome.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,6 +42,12 @@ export default {
     '@nuxtjs/strapi',
     '@nuxtjs/auth-next'
   ],
+  beaufy: {
+    css: true,
+    materialDesignIcons: false,
+    materialDesignIconsHRef: "http://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css",
+    async: true
+  },
 
   auth: {
     redirect: {
@@ -73,5 +78,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  buildModules: [
+    '@nuxtjs/color-mode',
+    '@nuxtjs/svg'
+  ]
 }

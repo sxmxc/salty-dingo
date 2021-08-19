@@ -3,38 +3,7 @@
    <Navbar />
 
     <section class="main-content columns">
-      <aside class="column is-2 section">
-          <b-sidebar
-                position="static"
-                :fullheight="fullheight"
-                :mobile="mobile"
-                :expand-on-hover="expandOnHover"
-                :reduce="reduce"
-                :delay="expandWithDelay ? 500 : null"
-                type="is-light"
-                open
-            >
-            <b-menu v-if="reduce" class="is-custom-mobile">
-              <b-menu-list label="Navigation">
-                <b-icon class="is-pulled-right" :icon="reduce ? 'menu-left' : 'menu-right'"></b-icon>
-                <b-menu-item v-for="(item, key) of items" :key="key" :icon="item.icon" tag=nuxt-link :to="item.to" exact-active-class="is-active">
-                </b-menu-item>
-              </b-menu-list>
-              <b-menu-list label="Actions">
-                  <b-menu-item icon="logout" label="Logout"></b-menu-item>
-              </b-menu-list>
-            </b-menu>
-            <b-menu v-else class="is-custom-mobile">
-              <b-menu-list label="Navigation">
-                <b-menu-item v-for="(item, key) of items" :key="key" :icon="item.icon" :label="item.title" tag=nuxt-link :to="item.to" exact-active-class="is-active">
-                </b-menu-item>
-              </b-menu-list>
-              <b-menu-list label="Actions">
-                  <b-menu-item icon="logout" label="Logout"></b-menu-item>
-              </b-menu-list>
-            </b-menu>
-          </b-sidebar>
-      </aside>
+      <Sidebar />
 
       <div class="p-1">
         <Nuxt />
@@ -45,9 +14,11 @@
 
 <script>
 import Navbar from "~/components/Navbar";
+import Sidebar from "~/components/Sidebar"
 export default {
 components: {
  Navbar,
+ Sidebar
  },
   data () {
     return {
@@ -113,12 +84,12 @@ components: {
     flex-direction: column;
     width: 100%;
     min-height: 100%;
-    // min-height: 100vh;
+    min-height: 100vh;
     .sidebar-layout {
         display: flex;
         flex-direction: row;
         min-height: 100%;
-        // min-height: 100vh;
+        min-height: 100vh;
     }
 }
 @media screen and (max-width: 1023px) {

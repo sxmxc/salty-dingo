@@ -14,7 +14,7 @@
         title="Responsive"
         icon="cellphone-link"
       >
-        <b class="has-text-grey">
+        <b>
           Every
         </b> component is responsive
       </card>
