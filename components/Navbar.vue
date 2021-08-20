@@ -20,6 +20,15 @@
                     Contact
                 </b-navbar-item>
             </b-navbar-dropdown>
+            <b-navbar-item>
+            <b-autocomplete placeholder="Search..."
+                icon="magnify"
+                icon-clickable
+                @icon-click="searchIconClick"
+                clearable
+                @select="option => selected = option">
+            </b-autocomplete>
+            </b-navbar-item>
         </template>
 
         <template #end>
@@ -28,7 +37,7 @@
                     <a class="button is-primary">
                         <strong>Sign up</strong>
                     </a>
-                    <a class="button is-light">
+                    <a class="button is-light" @click="$auth.login()">
                         Log in
                     </a>
                 </div>

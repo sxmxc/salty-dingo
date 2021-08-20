@@ -1,48 +1,74 @@
 <template>
-<section class="section">
-  <div>
-    <form @submit.prevent="userLogin">
-      <div>
-        <label>Username</label>
-        <input v-model="login.username" type="text"/>
+    <div class="column is-half">
+      <div v-show="error !== ''" class="">
+      <p>{{ error }}</p>
       </div>
+    <h1 class="title">Login</h1>
+    <form @submit="loginUser">
+      <b-field label="Email">
+            <b-input type="email"
+                v-model="identifier"
+                value=""
+                maxlength="30"
+                icon="email"
+            icon-right="close-circle"
+            icon-right-clickable
+            @icon-right-click="clearIconClick">
+            </b-input>
+        </b-field>
+      <b-field label="Password">
+            <b-input type="password"
+                v-model="password"
+                value=""
+                password-reveal>
+            </b-input>
+        </b-field>
       <div>
-        <label>Password</label>
-        <input  v-model="login.password" type="password" />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
+        <button
+          :disabled="identifier === '' || password === ''"
+          class="button--green"
+          type="submit"
+        >
+          Login
+        </button>
       </div>
     </form>
-  </div>
-</section>
-</template>
+    </div> 
 
+
+</template>
 <script>
 export default {
-  auth: 'guest',
-  layout: 'public',
+  layout: "public",
   data() {
     return {
-      login: {
-        username: '',
-        password: ''
-      }
+      identifier: '',
+      password: '',
+      error: '',
     }
   },
   methods: {
-    async userLogin() {
+    async loginUser(e) {
+      e.preventDefault()
       try {
-        const response = await this.$strapi.login({ identifier: this.login.username, password: this.login.password })
-
-        this.$auth.setUser(response.data.user).then(() => this.$toast.success('User set!'))
-        this.$auth.setUserToken(response.data.jwt).then(() => this.$toast.success('Token set!'))
-        console.log(response)
-
-      } catch (err) {
-        console.log(err)
+        const user = await this.$strapi.login({
+          identifier: this.identifier,
+          password: this.password,
+        })
+        console.log(user)
+        if (user !== null) {
+          this.error = ''
+          this.$nuxt.$router.push('/')
+        }
+      } catch (error) {
+        this.error = 'Error in login credentials'
       }
-    }
-  }
+    },
+    clearIconClick() {
+                this.identifier = '';
+            },
+  },
+  middleware: 'auth',
 }
 </script>
+<style></style>

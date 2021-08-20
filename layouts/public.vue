@@ -2,10 +2,8 @@
   <div>
    <Navbar />
 
-    <section class="main-content columns">
-      <div class="p-1">
+    <section class="columns is-centered">
         <Nuxt />
-      </div>
     </section>
   </div>
 </template>
