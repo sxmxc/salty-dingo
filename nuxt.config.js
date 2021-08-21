@@ -13,10 +13,10 @@ export default {
     ]
   },
   server: {
-    host:'0.0.0.0'
+    host: '0.0.0.0'
   },
   publicRuntimeConfig: {
-    baseUrl: process.env.BASE_URL || 'http://voidmoose.net:3000'
+    baseUrl: process.env.BASE_URL || 'http://natas:3000'
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -36,6 +36,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/svg'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,7 +49,8 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/strapi',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/i18n'
   ],
   beaufy: {
     css: true,
@@ -57,32 +60,38 @@ export default {
   },
 
   auth: {
-    redirect: {
-    login: '/login',
-    logout: '/',
-    callback: '/auth/signed-in',
-    home: '/'
-    },
     strategies: {
-      auth0: {
-        domain: 'dev-chipper-whombat.us.auth0.com',
-        clientId: 'D3wgy8znQozF6PYG3Pze7BtMbEOmAsWw',
-        audience: 'http://natas:1337',
-        logoutRedirectUri: 'http://natas:3000'
+      strapiAuth0: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'http://natas:1337/connect/auth0'
+        },
+        logoutRedirectUri: 'http://natas:3000/login',
+        redirect: {
+          login: '/login',
+          logout: '/',
+          callback: '/connect/auth0',
+          home: '/'
+        },
+      },
+      localStorage: false,
+      rewriteRedirects: false
     }
-  }
+
   },
 
   router: {
   },
 
   strapi: {
-    entities: [ 'organizations','contacts','users'],
-    url: 'http://localhost:1337'
+    entities: ['organizations', 'contacts', 'users'],
+    url: 'http://natas:1337'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://natas:1337'
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -94,8 +103,4 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  buildModules: [
-    '@nuxtjs/color-mode',
-    '@nuxtjs/svg'
-  ]
 }

@@ -1,7 +1,5 @@
 <template>
   <div>
-   <Navbar />
-
     <section class="columns is-centered">
         <Nuxt />
     </section>
@@ -9,11 +7,9 @@
 </template>
 
 <script>
-import Navbar from "~/components/Navbar";
+
 export default {
-components: {
- Navbar,
- },
+  auth: false,
   data () {
     return {
     }

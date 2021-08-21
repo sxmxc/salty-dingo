@@ -1,12 +1,12 @@
 <template>
     <b-navbar>
         <template #brand>
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item tag="router-link" to="/">
                <h1>void<strong>moose</strong>.net</h1>
             </b-navbar-item>
         </template>
-        <template #start>
-            <b-navbar-item href="#">
+        <template #start v-if="isAuthenticated">
+            <b-navbar-item href="/">
                 Home
             </b-navbar-item>
             <b-navbar-item href="#">
@@ -24,7 +24,6 @@
             <b-autocomplete placeholder="Search..."
                 icon="magnify"
                 icon-clickable
-                @icon-click="searchIconClick"
                 clearable
                 @select="option => selected = option">
             </b-autocomplete>
@@ -33,12 +32,15 @@
 
         <template #end>
             <b-navbar-item tag="div">
+            <NuxtLink :to="`/users/${userId}`">
+             <p v-if="username"><span><b-icon icon="account"></b-icon></span> {{ username }}</p>
+            </NuxtLink>
                 <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
+                    <a class="button is-primary" v-if="username" @click="logout">
+                        <strong>Logout</strong>
                     </a>
-                    <a class="button is-light" @click="$auth.login()">
-                        Log in
+                    <a class="button is-light" href="http://natas:1337/connect/auth0" v-if="!username">
+                        <strong>Log in</strong>
                     </a>
                 </div>
             </b-navbar-item>
@@ -50,6 +52,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
+    data() {
+        return{
+            username: this.$auth.$storage.getUniversal('user')?.username,
+            userId: this.$auth.$storage.getUniversal('user')?.id
+        }
+    },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
@@ -73,6 +81,19 @@ export default {
         })
       })
     }
+  },
+  methods: {
+    login() {
+         window.$nuxt.$router.redirect('http://natas:1337/connect/auth0');
+         return {}
+      },
+    logout() {
+      this.$auth.$storage.removeUniversal('user')
+      this.$auth.$storage.removeUniversal('jwt')
+      this.$auth.logout()
+      window.$nuxt.$router.push('/login')
+    }
+
   },
 }
 </script>

@@ -5,7 +5,7 @@
     <section class="main-content columns">
       <Sidebar />
 
-      <div class="p-1">
+      <div class="column is-fluid">
         <Nuxt />
       </div>
     </section>
@@ -16,9 +16,10 @@
 import Navbar from "~/components/Navbar";
 import Sidebar from "~/components/Sidebar"
 export default {
+    middleware: 'auth',
 components: {
  Navbar,
- Sidebar
+ Sidebar,
  },
   data () {
     return {
