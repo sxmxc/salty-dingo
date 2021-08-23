@@ -22,7 +22,7 @@
 <script>
   export default {
      async asyncData({$axios, $auth, route}) {
-      const contacts = await $axios.$get(`/contacts/${ route.params.id }`, {
+      const contacts = await $axios.$get(`/contacts/`, {
       headers: {
         Authorization: `Bearer ${ $auth.$storage.getUniversal('jwt') }`
       }

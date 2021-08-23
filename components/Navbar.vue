@@ -39,7 +39,7 @@
                     <a v-if="username" class="button is-primary"  @click="logout">
                         <strong>Logout</strong>
                     </a>
-                    <a v-if="!username" class="button is-light" href="http://natas:1337/connect/auth0" >
+                    <a v-if="!username" class="button is-light" href="http://api.voidmoose.lan:1337/connect/auth0" >
                         <strong>Log in</strong>
                     </a>
                 </div>

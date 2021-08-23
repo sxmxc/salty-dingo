@@ -76,9 +76,9 @@ export default {
       strapiAuth0: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'http://natas:1337/connect/auth0'
+          authorization: 'http://api.voidmoose.lan:1337/connect/auth0'
         },
-        logoutRedirectUri: 'http://natas:3000/login',
+        logoutRedirectUri: 'http://docker1.voidmoose.lan:3000/login',
       },
     }
 
@@ -89,12 +89,12 @@ export default {
 
   strapi: {
     entities: ['organizations', 'contacts', 'users'],
-    url: 'http://natas:1337'
+    url: 'http://api.voidmoose.lan:1337'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://natas:1337'
+    baseURL: 'http://api.voidmoose.lan:1337'
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

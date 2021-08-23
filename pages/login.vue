@@ -10,7 +10,7 @@
       <h2 class="m-5 font-black text-3xl">Login with provider</h2>
       <div class="shadow-xl bg-white p-10">
         <a
-          href="http://natas:1337/connect/auth0"
+          href="http://api.voidmoose.lan:1337/connect/auth0"
           class="cursor-pointer button shadow-xl"
         >
           <b-icon icon="shield-star"></b-icon>

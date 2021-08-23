@@ -13,20 +13,21 @@
 
 <script>
 export default {
-  name: 'App',
+  async asyncData({$axios, $auth, route}) {
+      const organizations = await $axios.$get(`/organizations/`, {
+      headers: {
+        Authorization: `Bearer ${ $auth.$storage.getUniversal('jwt') }`
+      }
+    })
+    return organizations
+    },
   data () {
     return {
       organizations: [],
       error: null
     }
   },
-  async mounted () {
-    try {
-      this.organizations = await this.$strapi.$organizations.find()
-    } catch (error) {
-      this.error = error
-    }
-  }
+   
 }
 </script>
 
