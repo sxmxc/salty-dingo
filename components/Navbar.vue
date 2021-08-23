@@ -5,7 +5,7 @@
                <h1>void<strong>moose</strong>.net</h1>
             </b-navbar-item>
         </template>
-        <template #start v-if="isAuthenticated">
+        <template v-if="isAuthenticated" #start >
             <b-navbar-item href="/">
                 Home
             </b-navbar-item>
@@ -36,10 +36,10 @@
              <p v-if="username"><span><b-icon icon="account"></b-icon></span> {{ username }}</p>
             </NuxtLink>
                 <div class="buttons">
-                    <a class="button is-primary" v-if="username" @click="logout">
+                    <a v-if="username" class="button is-primary"  @click="logout">
                         <strong>Logout</strong>
                     </a>
-                    <a class="button is-light" href="http://natas:1337/connect/auth0" v-if="!username">
+                    <a v-if="!username" class="button is-light" href="http://natas:1337/connect/auth0" >
                         <strong>Log in</strong>
                     </a>
                 </div>
@@ -83,14 +83,12 @@ export default {
     }
   },
   methods: {
-    login() {
-         window.$nuxt.$router.redirect('http://natas:1337/connect/auth0');
-         return {}
-      },
     logout() {
       this.$auth.$storage.removeUniversal('user')
       this.$auth.$storage.removeUniversal('jwt')
-      this.$auth.logout()
+      this.$auth.$storage.removeUniversal('id_token')
+      this.$auth.$storage.removeUniversal('loggedIn')
+      // this.$auth.logout()
       window.$nuxt.$router.push('/login')
     }
 

@@ -23,6 +23,6 @@
 </template>
 <script>
 export default {
-    layout: 'public'
+    layout: 'unsecure'
 }
 </script>

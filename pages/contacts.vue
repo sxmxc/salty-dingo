@@ -21,16 +21,18 @@
 
 <script>
   export default {
+     async asyncData({$axios, $auth, route}) {
+      const contacts = await $axios.$get(`/contacts/${ route.params.id }`, {
+      headers: {
+        Authorization: `Bearer ${ $auth.$storage.getUniversal('jwt') }`
+      }
+    })
+    return contacts
+    },
     data() {
       return {
-        contacts: [],
         error: null
       }
     },
-    async fetch() {
-      this.contacts = await fetch(
-        'http://localhost:1337/contacts'
-      ).then(res => res.json())
-    }
   }
 </script>

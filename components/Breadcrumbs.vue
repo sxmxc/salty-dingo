@@ -24,8 +24,6 @@ export default {
       params.forEach((param, index) => {
         path = `${path}/${param}`
         const match = this.$router.match(path)
-
-
         if (match.name !== null) {
           crumbs.push({param,
             ...match,})
@@ -34,7 +32,6 @@ export default {
       })      
       // url:     /blog/2020/11/20/my-post-url
       // outputs: ['blog','2020','11','20','my-post-url']
-
       return crumbs
     }
   }

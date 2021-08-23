@@ -15,6 +15,7 @@ export default {
   server: {
     host: '0.0.0.0'
   },
+  serverMiddleware: ['~/server-middleware/logger'],
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL || 'http://natas:3000'
   },
@@ -60,6 +61,17 @@ export default {
   },
 
   auth: {
+    localStorage: false,
+    rewriteRedirects: false,
+    fullPathRedirect: false,
+    token: {
+      global: true
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/'
+    },
     strategies: {
       strapiAuth0: {
         scheme: 'oauth2',
@@ -67,15 +79,7 @@ export default {
           authorization: 'http://natas:1337/connect/auth0'
         },
         logoutRedirectUri: 'http://natas:3000/login',
-        redirect: {
-          login: '/login',
-          logout: '/',
-          callback: '/connect/auth0',
-          home: '/'
-        },
       },
-      localStorage: false,
-      rewriteRedirects: false
     }
 
   },

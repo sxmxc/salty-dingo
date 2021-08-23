@@ -1,6 +1,7 @@
 <template>
   <div>
-   <Navbar />
+    <Navbar />
+    <Breadcrumbs />
 
     <section class="main-content columns">
       <Sidebar />
@@ -13,67 +14,67 @@
 </template>
 
 <script>
-import Navbar from "~/components/Navbar";
-import Sidebar from "~/components/Sidebar"
+import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Navbar from '~/components/Navbar'
+import Sidebar from '~/components/Sidebar'
 export default {
-    middleware: 'auth',
-components: {
- Navbar,
- Sidebar,
- },
-  data () {
+  components: {
+    Navbar,
+    Sidebar,
+    Breadcrumbs,
+  },
+  middleware: 'auth',
+  data() {
     return {
       expandOnHover: true,
       expandWithDelay: false,
-      mobile: "reduce",
+      mobile: 'reduce',
       reduce: false,
       fullheight: true,
       items: [
         {
           title: 'Home',
           icon: 'view-dashboard',
-          to: { name: 'index' }
+          to: { name: 'index' },
         },
-         {
+        {
           title: 'Devices',
           icon: 'server',
-          to: { name: 'devices' }
+          to: { name: 'devices' },
         },
-         {
+        {
           title: 'Change Management',
           icon: 'cog-transfer',
-          to: { name: 'change_management' }
+          to: { name: 'change_management' },
         },
         {
           title: 'Organizations',
           icon: 'office-building',
-          to: { name: 'organizations' }
+          to: { name: 'organizations' },
         },
-         {
+        {
           title: 'Contacts',
           icon: 'contacts',
-          to: { name: 'contacts' }
+          to: { name: 'contacts' },
         },
         {
           title: 'Settings',
           icon: 'cogs',
-          to: { name: 'settings' }
+          to: { name: 'settings' },
         },
-         {
+        {
           title: 'Info',
           icon: 'information',
-          to: { name: 'info' }
+          to: { name: 'info' },
         },
-         {
+        {
           title: 'Help',
           icon: 'help-circle',
-          to: { name: 'help' }
+          to: { name: 'help' },
         },
-         
-        
-      ]
+      ],
     }
-  }
+  },
 }
 </script>
 <style lang="scss">
@@ -81,85 +82,85 @@ components: {
   padding: 1em;
 }
 .sidebar-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+  .sidebar-layout {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex-direction: row;
     min-height: 100%;
     min-height: 100vh;
-    .sidebar-layout {
-        display: flex;
-        flex-direction: row;
-        min-height: 100%;
-        min-height: 100vh;
-    }
+  }
 }
 @media screen and (max-width: 1023px) {
-    .b-sidebar {
-        .sidebar-content {
-            &.is-mini-mobile {
-                &:not(.is-mini-expand),
-                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
-                    .menu-list {
-                        li {
-                            a {
-                                span:nth-child(2) {
-                                    display: none;
-                                }
-                            }
-                            ul {
-                                padding-left: 0;
-                                li {
-                                    a {
-                                        display: inline-block;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .menu-label:not(:last-child) {
-                        margin-bottom: 0;
-                    }
+  .b-sidebar {
+    .sidebar-content {
+      &.is-mini-mobile {
+        &:not(.is-mini-expand),
+        &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
+          .menu-list {
+            li {
+              a {
+                span:nth-child(2) {
+                  display: none;
                 }
+              }
+              ul {
+                padding-left: 0;
+                li {
+                  a {
+                    display: inline-block;
+                  }
+                }
+              }
             }
+          }
+          .menu-label:not(:last-child) {
+            margin-bottom: 0;
+          }
         }
+      }
     }
+  }
 }
 @media screen and (min-width: 1024px) {
-    .b-sidebar {
-        .sidebar-content {
-            &.is-mini {
-                &:not(.is-mini-expand),
-                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
-                    .menu-list {
-                        li {
-                            a {
-                                span:nth-child(2) {
-                                    display: none;
-                                }
-                            }
-                            ul {
-                                padding-left: 0;
-                                li {
-                                    a {
-                                        display: inline-block;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .menu-label:not(:last-child) {
-                        margin-bottom: 0;
-                    }
+  .b-sidebar {
+    .sidebar-content {
+      &.is-mini {
+        &:not(.is-mini-expand),
+        &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
+          .menu-list {
+            li {
+              a {
+                span:nth-child(2) {
+                  display: none;
                 }
+              }
+              ul {
+                padding-left: 0;
+                li {
+                  a {
+                    display: inline-block;
+                  }
+                }
+              }
             }
+          }
+          .menu-label:not(:last-child) {
+            margin-bottom: 0;
+          }
         }
+      }
     }
+  }
 }
 .is-mini-expand {
-    .menu-list a {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .menu-list a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 </style>

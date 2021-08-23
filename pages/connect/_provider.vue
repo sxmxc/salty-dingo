@@ -6,8 +6,9 @@
 <script>
 
 export default {
-  layout: "public",
-  data() {
+  name: 'Provider',
+  layout: "unsecure",
+    data() {
     return {
       provider: this.$route.params.provider,
       access_token: this.$route.query.access_token,
@@ -15,7 +16,9 @@ export default {
     }
   },
   async mounted() {
-    const res = await this.$axios.$get(
+
+    try {
+      const res = await this.$axios.$get(
       `/auth/${this.provider}/callback?access_token=${this.access_token}`
     )
     
@@ -24,8 +27,13 @@ export default {
     this.$auth.$storage.setUniversal('jwt', jwt)
     this.$auth.$storage.setUniversal('user', { username: user.username, id: user.id, email: user.email })
     this.$auth.$storage.setUniversal('loggedIn', true)
-    this.$auth.$storage.setUniversal('redirect', "/")
-    window.$nuxt.$router.redirect("/")
+    this.$auth.$storage.setUniversal('id_token', this.id_token)
+    this.$router.push('/')
+
+    } catch(e) {
+      this.$toast.error(e)
+    }
+    
   },
 }
 </script>
