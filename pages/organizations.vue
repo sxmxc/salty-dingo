@@ -19,11 +19,11 @@ export default {
         Authorization: `Bearer ${ $auth.$storage.getUniversal('jwt') }`
       }
     })
-    return organizations
+    // console.log("Getting Organizations using token: " + `Bearer ${ $auth.$storage.getUniversal('jwt') }`)
+    return { organizations }
     },
   data () {
     return {
-      organizations: [],
       error: null
     }
   },

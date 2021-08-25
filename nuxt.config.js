@@ -61,24 +61,44 @@ export default {
   },
 
   auth: {
-    localStorage: false,
-    rewriteRedirects: false,
-    fullPathRedirect: false,
+    localStorage: {
+      prefix: 'auth.'
+    },
+    rewriteRedirects: true,
+    fullPathRedirect: true,
     token: {
       global: true
+    },
+    cookie: {
+      options: {
+        secure: false
+      }
     },
     redirect: {
       login: '/login',
       logout: '/',
-      home: '/'
+      home: '/',
+      callback: '/connect/_provider'
     },
     strategies: {
       strapiAuth0: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'http://api.voidmoose.lan:1337/connect/auth0'
+          authorization: 'http://api.voidmoose.lan:1337/connect/auth0',
+          token: undefined,
         },
-        logoutRedirectUri: 'http://docker1.voidmoose.lan:3000/login',
+        logoutRedirectUri: 'http://dev.voidmoose.lan:3000/login',
+        token: {
+          property: 'id_token',
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        responseType: 'token',
+        scope: ['openid', 'profile', 'email'],
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
       },
     }
 

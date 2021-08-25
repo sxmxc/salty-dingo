@@ -32,14 +32,14 @@
 
         <template #end>
             <b-navbar-item tag="div">
-            <NuxtLink :to="`/users/${userId}`">
-             <p v-if="username"><span><b-icon icon="account"></b-icon></span> {{ username }}</p>
+            <NuxtLink :to="`/users/${loggedInUser.id}`">
+             <p v-if="username"><span><b-icon icon="account"></b-icon></span> {{ loggedInUser.username }}</p>
             </NuxtLink>
                 <div class="buttons">
-                    <a v-if="username" class="button is-primary"  @click="logout">
+                    <a v-if="isAuthenticated" class="button is-primary"  @click="logout">
                         <strong>Logout</strong>
                     </a>
-                    <a v-if="!username" class="button is-light" href="http://api.voidmoose.lan:1337/connect/auth0" >
+                    <a v-if="!isAuthenticated" class="button is-light" @click="$auth.loginWith(strapiAuth0)">
                         <strong>Log in</strong>
                     </a>
                 </div>
@@ -54,8 +54,8 @@ import { mapGetters } from 'vuex'
 export default {
     data() {
         return{
-            username: this.$auth.$storage.getUniversal('user')?.username,
-            userId: this.$auth.$storage.getUniversal('user')?.id
+            username: this.$auth.user?.username,
+            userId: this.$auth.user?.id
         }
     },
   computed: {
@@ -84,11 +84,11 @@ export default {
   },
   methods: {
     logout() {
-      this.$auth.$storage.removeUniversal('user')
-      this.$auth.$storage.removeUniversal('jwt')
-      this.$auth.$storage.removeUniversal('id_token')
-      this.$auth.$storage.removeUniversal('loggedIn')
-      // this.$auth.logout()
+      // this.$auth.$storage.removeUniversal('user')
+      // this.$auth.$storage.removeUniversal('jwt')
+      // this.$auth.$storage.removeUniversal('id_token')
+      // this.$auth.$storage.removeUniversal('loggedIn')
+      this.$auth.logout()
       window.$nuxt.$router.push('/login')
     }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="$strapi.user">
+    <p v-if="$auth.user">
       Logged in
     </p>
   </div>
@@ -11,14 +11,10 @@ export default {
   middleware: 'auth',
   computed: {
     user () {
-      return this.$strapi.user
+      return this.$auth.user
     }
   },
   methods: {
-    logout () {
-      this.$strapi.logout()
-      this.$router.push('/')
-    }
   }
 }
 </script>
