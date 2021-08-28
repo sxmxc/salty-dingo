@@ -64,10 +64,10 @@ export default {
     localStorage: {
       prefix: 'auth.'
     },
-    rewriteRedirects: true,
-    fullPathRedirect: true,
+    rewriteRedirects: false,
+    fullPathRedirect: false,
     token: {
-      global: true
+      global: false
     },
     cookie: {
       options: {
@@ -78,7 +78,7 @@ export default {
       login: '/login',
       logout: '/',
       home: '/',
-      callback: '/connect/_provider'
+      callback: '/connect/auth0'
     },
     strategies: {
       strapiAuth0: {
@@ -108,7 +108,7 @@ export default {
   },
 
   strapi: {
-    entities: ['organizations', 'contacts', 'users'],
+    entities: ['organizations', 'contacts', 'devices'],
     url: 'http://api.voidmoose.lan:1337'
   },
 

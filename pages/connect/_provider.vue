@@ -8,7 +8,7 @@
 export default {
   name: 'Provider',
   layout: "unsecure",
-    data() {
+  data() {
     return {
       provider: this.$route.params.provider,
       access_token: this.$route.query.access_token,
@@ -22,21 +22,22 @@ export default {
       `/auth/${this.provider}/callback?access_token=${this.access_token}`
     )
     
-    const { jwt ,user } = res
-    // store jwt and user object in localStorage
-    // this.$auth.$storage.setUniversal('jwt', jwt)
-    // this.$auth.$storage.setUniversal('user', { username: user.username, id: user.id, email: user.email })
-    // this.$auth.$storage.setUniversal('loggedIn', true)
-    // this.$auth.$storage.setUniversal('id_token', id_token)
-    this.$auth.setUser({ username: user.username, id: user.id, email: user.email })
+    const { jwt, user } = res
+   // store jwt and user object in localStorage
+   // this.$auth.$storage.setUniversal('jwt', jwt)
+   // this.$auth.$storage.setUniversal('user', { username: user.username, id: user.id, email: user.email })
+    this.$auth.$storage.setUniversal('loggedIn', true)
+   // this.$auth.$storage.setUniversal('id_token', id_token)
+    this.$auth.setUser(user)
     this.$auth.setUserToken(jwt)
     this.$router.push('/')
 
     } catch(e) {
-       console.log(e)
-       this.$router.push('/')
+      console.log(e)
     }
     
   },
+  
+
 }
 </script>

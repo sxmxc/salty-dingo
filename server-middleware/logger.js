@@ -1,6 +1,6 @@
-export default function (req, res, next) {
+export default function (req,res, next) {
     // req is the Node.js http request object
-    console.log("Server request from: " + req.url)
+    console.log("Request to server " + req.url)
 
     // res is the Node.js http response object
 
