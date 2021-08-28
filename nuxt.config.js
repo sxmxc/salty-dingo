@@ -84,10 +84,10 @@ export default {
       strapiAuth0: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'https://api.voidmose.net/connect/auth0',
+          authorization: 'https://api.voidmoose.net/connect/auth0',
           token: undefined,
         },
-        logoutRedirectUri: 'http://dev.voidmoose.lan:3000/login',
+        logoutRedirectUri: 'http://dev.voidmoose.lan:8080/login',
         token: {
           property: 'id_token',
           type: 'Bearer',
