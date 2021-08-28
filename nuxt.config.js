@@ -84,7 +84,7 @@ export default {
       strapiAuth0: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'http://api.voidmoose.lan:1337/connect/auth0',
+          authorization: 'https://api.voidmose.net/connect/auth0',
           token: undefined,
         },
         logoutRedirectUri: 'http://dev.voidmoose.lan:3000/login',
@@ -109,12 +109,12 @@ export default {
 
   strapi: {
     entities: ['organizations', 'contacts', 'devices'],
-    url: 'http://api.voidmoose.lan:1337'
+    url: 'https://api.voidmoose.net'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://api.voidmoose.lan:1337'
+    baseURL: 'https://api.voidmoose.net'
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
